@@ -1,10 +1,9 @@
-#awk
+#/usr/bin/awk -f src/2025/01.awk data/2025/01.in
 
 BEGIN {
     number = 50;
     nb_zero = 0;
     nb_passage = 0;
-    printf "Starting number: %d\n", number;
 }
 END {
     printf "Part 1: %d\n", nb_zero;

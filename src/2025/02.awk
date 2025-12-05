@@ -1,6 +1,6 @@
-#awk
+#/usr/bin/awk -f src/2025/02.awk data/2025/02.in
 
-@include "./../functions/repeat.awk" # Charger la fonction repeat depuis le fichier externe
+@include "repeat.awk" # Charger la fonction repeat depuis le fichier externe
 
 BEGIN {
     FS = "," # Séparateur de champs = virgule
