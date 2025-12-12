@@ -1,0 +1,11 @@
+{
+    "name": "akwawa/advent-of-code",
+    "description": "Résolution des puzzle adventofcode.com",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Akwawa\\AdventOfCode\\": "src/"
+        }
+    },
+    "require": {}
+}
