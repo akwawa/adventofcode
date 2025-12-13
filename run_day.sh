@@ -73,12 +73,17 @@ fi
 download_input() {
     local file=$1
     local year=$2
-    local day=$3
-    if [ ! -f "$file" ]; then
+    local day=$((10#$3))
+    if [[ ! -s "$file" ]]; then
         mkdir -p "data/$year"
         echo "Téléchargement de $file..."
-        curl -s -b "session=$AOC_SESSION" \
-            "https://adventofcode.com/$year/day/$day/input" -o "$file"
+        http_code=$(curl --silent --cookie "session=$AOC_SESSION" \
+            --write-out "%{http_code}" \
+            "https://adventofcode.com/$year/day/$day/input" --output "$file")
+        if [[ $http_code -ne 200 ]]; then
+            echo "Fichier absent (HTTP $http_code)"
+            rm -f "$file"
+        fi
     fi
 }
 
@@ -94,6 +99,10 @@ run_day() {
         echo "Erreur : script $script introuvable."
         return 1
     fi
+
+    if [[ ! -s "$data" ]]; then
+        download_input "$data" "$year" "$day"
+    fi;
 
     if $SHOW_TIME; then
         local start=$(date +%s.%N)
